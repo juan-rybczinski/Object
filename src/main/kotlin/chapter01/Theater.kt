@@ -1,3 +1,5 @@
+package chapter01
+
 class Theater(
     private val ticketSeller: TicketSeller
 ) {
