@@ -1,13 +1,16 @@
 package chapter02
 
-import java.math.BigDecimal
+import java.time.Duration
 
-class Movie {
-    fun getFee(): Money {
-        return Money(BigDecimal(0))
-    }
+data class Movie(
+    private val title: String,
+    private val runningTime: Duration,
+    private val fee: Money,
+    private val discountPolicy: DiscountPolicy
+) {
+    fun getFee(): Money = fee
 
     fun calculateMovieFee(screening: Screening): Money {
-        return Money(BigDecimal(0))
+        return fee.minus(discountPolicy.calculateDiscountAmount(screening))
     }
 }

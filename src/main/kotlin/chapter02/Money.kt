@@ -7,6 +7,8 @@ data class Money(
 ) {
     fun plus(amount: Money): Money = Money(this.amount.add(amount.amount))
 
+    fun plus(amount: Long): Money = Money(this.amount.add(BigDecimal.valueOf(amount)))
+
     fun minus(amount: Money): Money = Money(this.amount.subtract(amount.amount))
 
     fun times(percent: Double): Money = Money(this.amount.multiply(BigDecimal.valueOf(percent)))
