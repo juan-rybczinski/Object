@@ -29,6 +29,14 @@ fun main(args: Array<String>) {
         )
     )
 
+    val starWars = Movie(
+        "스타워즈",
+        Duration.ofMinutes(210),
+        Money.wons(10000),
+        NoneDiscountPolicy()
+    )
+
     println(avatar)
     println(titanic)
+    println(starWars)
 }

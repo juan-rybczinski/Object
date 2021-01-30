@@ -6,11 +6,11 @@ data class Movie(
     private val title: String,
     private val runningTime: Duration,
     private val fee: Money,
-    private val discountPolicy: DiscountPolicy
+    private val defaultDiscountPolicy: DefaultDiscountPolicy
 ) {
     fun getFee(): Money = fee
 
     fun calculateMovieFee(screening: Screening): Money {
-        return fee.minus(discountPolicy.calculateDiscountAmount(screening))
+        return fee.minus(defaultDiscountPolicy.calculateDiscountAmount(screening))
     }
 }
