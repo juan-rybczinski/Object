@@ -8,7 +8,10 @@ data class Movie(
     private val title: String,
     private val runningTime: Duration,
     private val fee: Money,
-    private val discountConditions: List<DiscountCondition>,
+
+    private val periodConditions: List<PeriodCondition>,
+    private val sequenceConditions: List<SequenceCondition>,
+
     private val movieType: MovieType,
     private val discountAmount: Money,
     private val discountPercent: Double
@@ -37,7 +40,15 @@ data class Movie(
 
     private fun calculateAmountDiscountAmount() = discountAmount
 
-    private fun isDiscountable(screening: Screening): Boolean = discountConditions.stream()
+    private fun isDiscountable(screening: Screening): Boolean =
+        checkPeriodConditions(screening) || checkSequenceConditions(screening)
+
+    private fun checkSequenceConditions(screening: Screening): Boolean = sequenceConditions.stream()
+        .anyMatch {
+            it.isSatisfiedBy(screening)
+        }
+
+    private fun checkPeriodConditions(screening: Screening): Boolean = periodConditions.stream()
         .anyMatch {
             it.isSatisfiedBy(screening)
         }
